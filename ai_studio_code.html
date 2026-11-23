@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Portofolio_Biman | M. Fa'ieq Firmansyah Bimantara</title>
+  
+  <!-- Meta & Theme Color -->
+  <meta name="description" content="Portofolio resmi M. Fa'ieq Firmansyah Bimantara (Biman) - Visual Storyteller, Videografer & Graphic Designer." />
+  <meta name="theme-color" content="#030712" />
+
+  <!-- Google Fonts: Syne (Bold Editorial) & Plus Jakarta Sans (Clean Modern) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Remix Icons CDN (Ringan & Cepat) -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    /* ========================================================
+       1. CORE DESIGN SYSTEM & OPTIMIZASI PERFORMA
+       ======================================================== */
+    :root {
+      --bg-dark: #030712;
+      --bg-surface: #070d1e;
+      --bg-card: rgba(11, 20, 38, 0.75);
+      --bg-card-hover: rgba(18, 32, 60, 0.9);
+      --primary-blue: #0077ff;
+      --accent-cyan: #00e5ff;
+      --glow-blue: rgba(0, 119, 255, 0.25);
+      --border-line: rgba(56, 189, 248, 0.14);
+      --text-white: #f8fafc;
+      --text-muted: #94a3b8;
+      --font-heading: 'Syne', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-dark);
+      color: var(--text-white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+
+    body {
+      position: relative;
+      background: radial-gradient(circle at 50% 0%, #0a183d 0%, #030712 65%);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Blue Glow di latar belakang */
+    .ambient-glow {
+      position: fixed;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(0, 119, 255, 0.16) 0%, transparent 70%);
+      top: 10%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(85px);
+    }
+
+    /* ========================================================
+       2. NAVBAR
+       ======================================================== */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 990;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(3, 7, 18, 0.8);
+      border-bottom: 1px solid var(--border-line);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand-logo {
+      font-family: var(--font-heading);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: var(--text-white);
+    }
+
+    .brand-logo span {
+      color: var(--primary-blue);
+      text-shadow: 0 0 14px var(--primary-blue);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-id-trigger {
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.2), rgba(0, 229, 255, 0.1));
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      padding: 0.5rem 1.1rem;
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.3s var(--ease-smooth);
+    }
+
+    .btn-id-trigger:hover {
+      background: var(--accent-cyan);
+      color: #000;
+      box-shadow: 0 0 18px rgba(0, 229, 255, 0.45);
+    }
+
+    /* ========================================================
+       3. EFEK ID CARD GANTUNG (TURUN DARI ATAS)
+       ======================================================== */
+    .id-card-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 1.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.35s ease;
+    }
+
+    .id-card-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .id-lanyard-wrapper {
+      transform: translateY(-130%);
+      transition: transform 0.6s cubic-bezier(0.34, 1.45, 0.64, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 340px;
+    }
+
+    .id-card-overlay.active .id-lanyard-wrapper {
+      transform: translateY(0);
+    }
+
+    .lanyard-strap {
+      width: 20px;
+      height: 65px;
+      background: repeating-linear-gradient(45deg, #0077ff, #0077ff 8px, #041029 8px, #041029 16px);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+
+    .lanyard-clip {
+      width: 32px;
+      height: 16px;
+      background: #cbd5e1;
+      border-radius: 4px;
+      margin-bottom: 2px;
+    }
+
+    .id-badge {
+      width: 100%;
+      background: linear-gradient(165deg, #101c38 0%, #060b17 100%);
+      border: 1.5px solid rgba(0, 229, 255, 0.4);
+      border-radius: 20px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 119, 255, 0.25);
+      text-align: center;
+      padding: 1.8rem 1.4rem 1.4rem;
+      position: relative;
+    }
+
+    .id-avatar-box {
+      width: 105px;
+      height: 105px;
+      margin: 0.5rem auto 1rem;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--primary-blue));
+      box-shadow: 0 0 20px rgba(0, 119, 255, 0.5);
+    }
+
+    .id-avatar-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      background: #02050d;
+    }
+
+    .id-name {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.25;
+    }
+
+    .id-role {
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      letter-spacing: 1.2px;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+
+    .id-meta-grid {
+      margin-top: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed rgba(255, 255, 255, 0.15);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .id-meta-grid strong {
+      display: block;
+      color: #fff;
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    .btn-close-id {
+      margin-top: 1.2rem;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 0.65rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+
+    .btn-close-id:hover {
+      background: rgba(239, 68, 68, 0.85);
+      border-color: #ef4444;
+    }
+
+    /* ========================================================
+       4. HERO SECTION (CINEMATIC OPENING)
+       ======================================================== */
+    .hero-section {
+      min-height: 88vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7.5rem 1.5rem 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 1rem;
+      background: rgba(0, 119, 255, 0.12);
+      border: 1px solid rgba(0, 119, 255, 0.3);
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: clamp(2.3rem, 6.2vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 30%, var(--primary-blue) 80%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 2.2rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, var(--primary-blue), #0052b3);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.8rem;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 25px rgba(0, 119, 255, 0.35);
+      border: none;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(0, 119, 255, 0.5);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-line);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 12px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* ========================================================
+       5. SECTION GENERAL STYLES
+       ======================================================== */
+    .section-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 4.5rem 1.5rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .section-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-blue);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-headline {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    /* ========================================================
+       6. 10 MODEL DESAIN GRAFIS (MEMUTAR KE SAMPING)
+       ======================================================== */
+    .carousel-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      padding: 1rem 0;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 1.4rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 1rem 0.5rem 2rem;
+      cursor: grab;
+    }
+
+    .carousel-track:active {
+      cursor: grabbing;
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .design-card {
+      flex: 0 0 270px;
+      height: 390px;
+      scroll-snap-align: center;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #090e1c;
+      border: 1px solid var(--border-line);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+      transition: transform 0.35s var(--ease-smooth), border-color 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    @media (min-width: 768px) {
+      .design-card {
+        flex: 0 0 300px;
+        height: 430px;
+      }
+    }
+
+    .design-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 18px 40px rgba(0, 119, 255, 0.35);
+    }
+
+    .design-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .design-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .design-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 40%, rgba(3, 7, 18, 0.95) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem;
+      pointer-events: none;
+    }
+
+    .design-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 0.2rem;
+    }
+
+    .design-title {
+      font-family: var(--font-heading);
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .carousel-hint {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    /* ========================================================
+       7. KARYA VIDEO INSTAN (SESUAI REQUEST LINK & JUDUL)
+       ======================================================== */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+    }
+
+    .video-box:hover {
+      border-color: rgba(0, 119, 255, 0.5);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+    }
+
+    .video-thumb-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #02050e;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .video-thumb-wrap img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      transition: opacity 0.3s ease, transform 0.5s ease;
+    }
+
+    .video-box:hover .video-thumb-wrap img {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      background: rgba(0, 119, 255, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      box-shadow: 0 0 25px rgba(0, 119, 255, 0.8);
+      transition: all 0.25s ease;
+      z-index: 2;
+    }
+
+    .video-box:hover .play-button {
+      transform: translate(-50%, -50%) scale(1.15);
+      background: var(--accent-cyan);
+      color: #000;
+    }
+
+    .video-info {
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .video-badge {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.1);
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .video-title {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .video-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .video-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--primary-blue);
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .video-action-link:hover {
+      color: var(--accent-cyan);
+      gap: 0.6rem;
+    }
+
+    /* ========================================================
+       8. KEMAMPUAN, PENDIDIKAN, PENGHARGAAN & SERTIFIKAT (DARI CV)
+       ======================================================== */
+    .skills-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      max-width: 860px;
+      margin: 0 auto 3rem;
+    }
+
+    .skill-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-line);
+      padding: 0.5rem 1rem;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-white);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.25s ease;
+    }
+
+    .skill-pill:hover {
+      background: rgba(0, 119, 255, 0.15);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .cv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cv-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-line);
+      border-radius: 16px;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .cv-card:hover {
+      border-color: rgba(0, 119, 255, 0.4);
+    }
+
+    .cv-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .cv-card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 119, 255, 0.12);
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .cv-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .cv-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .cv-item-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .cv-item-sub {
+      font-size: 0.78rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .cv-item-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ========================================================
+       9. MODAL POPUP VIDEO PLAYER
+       ======================================================== */
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      padding: 1rem;
+    }
+
+    .video-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-dialog {
+      width: 100%;
+      max-width: 900px;
+      background: #090e1c;
+      border: 1px solid var(--border-line);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 38px;
+      height: 38px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close-btn:hover {
+      background: #ef4444;
+    }
+
+    .modal-iframe-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .modal-iframe-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* ========================================================
+       10. FOOTER
+       ======================================================== */
+    footer {
+      border-top: 1px solid var(--border-line);
+      background: #02050d;
+      padding: 3.5rem 1.5rem;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .footer-title {
+      font-family: var(--font-heading);
+      font-size: 1.4rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-line);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .social-btn:hover {
+      background: var(--primary-blue);
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 15px var(--primary-blue);
+      transform: translateY(-3px);
+    }
+
+    .copy-text {
+      font-size: 0.8rem;
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Effect -->
+  <div class="ambient-glow"></div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#" class="brand-logo">
+      Portofolio<span>_Biman</span>
+    </a>
+    <div class="nav-actions">
+      <button class="btn-id-trigger" onclick="toggleIdCard(true)">
+        <i class="ri-id-card-line"></i>
+        <span>Profil ID</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PULL-DOWN LANYARD ID CARD DARI ATAS (SESUAI CV) -->
+  <div class="id-card-overlay" id="idCardOverlay" onclick="handleOverlayClick(event)">
+    <div class="id-lanyard-wrapper">
+      <div class="lanyard-strap"></div>
+      <div class="lanyard-clip"></div>
+
+      <div class="id-badge">
+        <div class="id-avatar-box">
+          <!-- Foto Profesional Biman -->
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80" alt="M. Fa'ieq Firmansyah Bimantara">
+        </div>
+        <h3 class="id-name">M. Fa'ieq Firmansyah Bimantara</h3>
+        <p class="id-role">Director & Visual Artist</p>
+
+        <div class="id-meta-grid">
+          <div>
+            <span>ALAMAT</span>
+            <strong>Lamongan, Jatim</strong>
+          </div>
+          <div>
+            <span>PENDIDIKAN</span>
+            <strong>S1 UNISDA (IPK 3,78)</strong>
+          </div>
+          <div>
+            <span>KONTAK</span>
+            <strong>0896-4861-1919</strong>
+          </div>
+          <div>
+            <span>EMAIL</span>
+            <strong>faiqppnh@gmail.com</strong>
+          </div>
+        </div>
+
+        <button class="btn-close-id" onclick="toggleIdCard(false)">
+          <i class="ri-close-line"></i> Tutup ID Card
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HERO SECTION DENGAN SENTUHAN AI & IDENTITAS RESMI -->
+  <header class="hero-section">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="ri-sparkling-fill"></i> S1 Pendidikan Islam • Videografer & Graphic Designer
+      </div>
+      <h1 class="hero-title">
+        The Story Becomes <br />
+        <span class="text-gradient">Immersive.</span>
+      </h1>
+      <p class="hero-desc">
+        Saya <strong>M. Fa'ieq Firmansyah Bimantara</strong>, profesional kreatif dengan pengalaman lebih dari 5 tahun di bidang produksi video, sinematografi, penyuntingan video klip musik, profil desa, serta pembuatan materi desain grafis modern.
+      </p>
+      <div class="hero-cta">
+        <a href="#karya-video" class="btn-main">
+          <i class="ri-play-fill"></i> Tonton Karya Video
+        </a>
+        <a href="#desain-grafis" class="btn-ghost">
+          <i class="ri-gallery-line"></i> Lihat 10 Desain Grafis
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- BAGIAN 1: KARYA DESAIN GRAFIS (10 MODEL MEMUTAR KE SAMPING) -->
+  <section class="section-wrap" id="desain-grafis">
+    <div class="section-header">
+      <span class="section-tag">Visual Artwork & Posters</span>
+      <h2 class="section-headline">10 Model Desain Grafis</h2>
+    </div>
+
+    <div class="carousel-container">
+      <div class="carousel-track" id="designTrack">
+        
+        <!-- 01: Kernel One Cyberpunk -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=600&auto=format&fit=crop&q=80" alt="Kernel One Cyberpunk">
+          <div class="design-overlay">
+            <span class="design-num">01 / 10 • EDITORIAL</span>
+            <h4 class="design-title">Kernel One: Cinematic Vision</h4>
+          </div>
+        </div>
+
+        <!-- 02: Pulang Ke Diri Movie Poster -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop&q=80" alt="Pulang Ke Diri">
+          <div class="design-overlay">
+            <span class="design-num">02 / 10 • FILM POSTER</span>
+            <h4 class="design-title">Pulang Ke "Diri" - Film Fest</h4>
+          </div>
+        </div>
+
+        <!-- 03: Airport Looks AMI PARIS -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&auto=format&fit=crop&q=80" alt="Airport Looks Editorial">
+          <div class="design-overlay">
+            <span class="design-num">03 / 10 • FASHION</span>
+            <h4 class="design-title">Airport Looks × AMI PARIS</h4>
+          </div>
+        </div>
+
+        <!-- 04: Moments The Gesture -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&auto=format&fit=crop&q=80" alt="Moments The Gesture">
+          <div class="design-overlay">
+            <span class="design-num">04 / 10 • MAGAZINE</span>
+            <h4 class="design-title">Moments: The Gesture</h4>
+          </div>
+        </div>
+
+        <!-- 05: NEVER LOSE Spotify Cover -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80" alt="Never Lose Spotify Art">
+          <div class="design-overlay">
+            <span class="design-num">05 / 10 • MUSIC COVER</span>
+            <h4 class="design-title">NEVER LOSE - Studio Session</h4>
+          </div>
+        </div>
+
+        <!-- 06: Oprec Gita Maha Santri Choir -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=600&auto=format&fit=crop&q=80" alt="Recruitment Poster">
+          <div class="design-overlay">
+            <span class="design-num">06 / 10 • BRANDING</span>
+            <h4 class="design-title">Gita Maha Santri: Recruitment</h4>
+          </div>
+        </div>
+
+        <!-- 07: Cover Indonesia Pusaka Choir -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&auto=format&fit=crop&q=80" alt="Indonesia Pusaka">
+          <div class="design-overlay">
+            <span class="design-num">07 / 10 • CONCERT PROMO</span>
+            <h4 class="design-title">Indonesia Pusaka: Premiere</h4>
+          </div>
+        </div>
+
+        <!-- 08: Kami Sedaran Calligraphy -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=600&auto=format&fit=crop&q=80" alt="Kami Sedaran">
+          <div class="design-overlay">
+            <span class="design-num">08 / 10 • ARABIC TYPO</span>
+            <h4 class="design-title">Kami Sedaran: Hobi & Ruang</h4>
+          </div>
+        </div>
+
+        <!-- 09: My Kisah Graduation Memory -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=600&auto=format&fit=crop&q=80" alt="My Kisah Wisuda">
+          <div class="design-overlay">
+            <span class="design-num">09 / 10 • COLLAGE</span>
+            <h4 class="design-title">My Kisah: Momen Wisuda</h4>
+          </div>
+        </div>
+
+        <!-- 10: Kinetic Bold Typography Poster -->
+        <div class="design-card">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop&q=80" alt="Kinetic Title Art">
+          <div class="design-overlay">
+            <span class="design-num">10 / 10 • TYPOGRAPHY</span>
+            <h4 class="design-title">Fontes P/ Titulos Kinetic</h4>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="carousel-hint">
+        <i class="ri-arrow-left-line"></i> Geser samping untuk melihat seluruh 10 karya desain <i class="ri-arrow-right-line"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAGIAN 2: KARYA VIDEO INSTAN (SESUAI TAUTAN & JUDUL DARI ANDA) -->
+  <section class="section-wrap" id="karya-video">
+    <div class="section-header">
+      <span class="section-tag">Cinematography & Motion</span>
+      <h2 class="section-headline">Karya Video</h2>
+    </div>
+
+    <div class="video-grid">
+      
+      <!-- Video 1: Profil desa (YouTube) -->
+      <div class="video-box">
+        <div class="video-thumb-wrap" onclick="playInstantVideo('youtube', 'h3McRhd_ltM')">
+          <img src="https://img.youtube.com/vi/h3McRhd_ltM/hqdefault.jpg" alt="Profil desa" loading="lazy">
+          <div class="play-button"><i class="ri-play-fill"></i></div>
+        </div>
+        <div class="video-info">
+          <div>
+            <span class="video-badge">Dokumenter Desa</span>
+            <h3 class="video-title">Profil desa</h3>
+            <p class="video-desc">Eksplorasi visual dan kearifan lokal yang dikemas secara estetis dan sinematik.</p>
+          </div>
+          <a href="https://youtube.com/watch?v=h3McRhd_ltM" target="_blank" class="video-action-link">
+            Buka di YouTube <i class="ri-external-link-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Video 2: video clip musik (YouTube) -->
+      <div class="video-box">
+        <div class="video-thumb-wrap" onclick="playInstantVideo('youtube', 'CrGd3lG_3Pc')">
+          <img src="https://img.youtube.com/vi/CrGd3lG_3Pc/hqdefault.jpg" alt="video clip musik" loading="lazy">
+          <div class="play-button"><i class="ri-play-fill"></i></div>
+        </div>
+        <div class="video-info">
+          <div>
+            <span class="video-badge">Music Video</span>
+            <h3 class="video-title">video clip musik</h3>
+            <p class="video-desc">Harmoni audio visual dengan sentuhan sinematografi moody dan color grading profesional.</p>
+          </div>
+          <a href="https://youtube.com/watch?v=CrGd3lG_3Pc" target="_blank" class="video-action-link">
+            Buka di YouTube <i class="ri-external-link-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Video 3: Kreatif video Nasional (Instagram Reel) -->
+      <div class="video-box">
+        <div class="video-thumb-wrap" onclick="playInstantVideo('direct', 'https://www.instagram.com/reel/DRBkpF1ES7S/')">
+          <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=600&auto=format&fit=crop&q=80" alt="Kreatif video Nasional" loading="lazy">
+          <div class="play-button"><i class="ri-instagram-line"></i></div>
+        </div>
+        <div class="video-info">
+          <div>
+            <span class="video-badge">National Finalist</span>
+            <h3 class="video-title">Kreatif video Nasional</h3>
+            <p class="video-desc">Karya kompetisi video kreatif perwakilan Jawa Timur dengan penyampaian pesan dinamis.</p>
+          </div>
+          <a href="https://www.instagram.com/reel/DRBkpF1ES7S/" target="_blank" class="video-action-link">
+            Tonton di Instagram Reels <i class="ri-arrow-right-up-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Video 4: Filmmaker (Instagram Reel) -->
+      <div class="video-box">
+        <div class="video-thumb-wrap" onclick="playInstantVideo('direct', 'https://www.instagram.com/reel/DdwMWmuKwAY/')">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&auto=format&fit=crop&q=80" alt="Filmmaker Reel" loading="lazy">
+          <div class="play-button"><i class="ri-film-line"></i></div>
+        </div>
+        <div class="video-info">
+          <div>
+            <span class="video-badge">Directing & Storytelling</span>
+            <h3 class="video-title">Filmmaker</h3>
+            <p class="video-desc">Kompilasi sudut pandang penyutradaraan, pergerakan kamera, dan pembentukan emosi frame.</p>
+          </div>
+          <a href="https://www.instagram.com/reel/DdwMWmuKwAY/" target="_blank" class="video-action-link">
+            Tonton di Instagram Reels <i class="ri-arrow-right-up-line"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Video 5: Ai studio (Instagram Reel) -->
+      <div class="video-box">
+        <div class="video-thumb-wrap" onclick="playInstantVideo('direct', 'https://www.instagram.com/reel/DfFKOWiqZpi/')">
+          <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop&q=80" alt="Ai studio" loading="lazy">
+          <div class="play-button"><i class="ri-sparkling-fill"></i></div>
+        </div>
+        <div class="video-info">
+          <div>
+            <span class="video-badge">Generative AI Video</span>
+            <h3 class="video-title">Ai studio</h3>
+            <p class="video-desc">Eksplorasi transisi digital pakaian/jas dan manipulasi frame cerdas menggunakan teknologi AI.</p>
+          </div>
+          <a href="https://www.instagram.com/reel/DfFKOWiqZpi/" target="_blank" class="video-action-link">
+            Tonton di Instagram Reels <i class="ri-arrow-right-up-line"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- BAGIAN 3: KEMAMPUAN, PENDIDIKAN, PENGHARGAAN & SERTIFIKAT (DARI CV) -->
+  <section class="section-wrap" id="cv-info">
+    <div class="section-header">
+      <span class="section-tag">Competency & Qualifications</span>
+      <h2 class="section-headline">Keahlian & Pencapaian</h2>
+    </div>
+
+    <!-- Kemampuan Teknis & Manajerial dari CV -->
+    <div class="skills-badges">
+      <span class="skill-pill"><i class="ri-palette-line"></i> Video Color Grading</span>
+      <span class="skill-pill"><i class="ri-film-line"></i> Videography</span>
+      <span class="skill-pill"><i class="ri-movie-2-line"></i> Video Editing</span>
+      <span class="skill-pill"><i class="ri-scissors-cut-line"></i> CapCut</span>
+      <span class="skill-pill"><i class="ri-sparkling-2-line"></i> Artificial Intelligence</span>
+      <span class="skill-pill"><i class="ri-bar-chart-2-line"></i> Analytical Skills</span>
+      <span class="skill-pill"><i class="ri-mic-line"></i> Communication</span>
+      <span class="skill-pill"><i class="ri-team-line"></i> Teamwork</span>
+      <span class="skill-pill"><i class="ri-file-text-line"></i> Microsoft Office & Administration</span>
+    </div>
+
+    <!-- Grid: Pendidikan, Penghargaan & Sertifikasi -->
+    <div class="cv-grid">
+      
+      <!-- Pendidikan -->
+      <div class="cv-card">
+        <div class="cv-card-header">
+          <div class="cv-card-icon"><i class="ri-graduation-cap-line"></i></div>
+          <h3 class="cv-card-title">Pendidikan</h3>
+        </div>
+        <ul class="cv-list">
+          <li>
+            <div class="cv-item-title">
+              <span>Universitas Islam Darul Ulum Lamongan</span>
+              <span style="color:var(--accent-cyan); font-weight:700;">IPK 3,78</span>
+            </div>
+            <div class="cv-item-sub">S1 Pendidikan Agama Islam | Sep 2022 - Okt 2026</div>
+            <p class="cv-item-desc">
+              Aktif mengembangkan kompetensi kepemimpinan, komunikasi publik, dan kreativitas digital selama masa studi akademik dengan predikat sangat memuaskan.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Penghargaan -->
+      <div class="cv-card">
+        <div class="cv-card-header">
+          <div class="cv-card-icon"><i class="ri-trophy-line"></i></div>
+          <h3 class="cv-card-title">Penghargaan</h3>
+        </div>
+        <ul class="cv-list">
+          <li>
+            <div class="cv-item-title">Finalis Lomba Video Kreatif Tingkat Nasional</div>
+            <div class="cv-item-sub">Kreator & Pengembang Karya | Jan 2025</div>
+            <p class="cv-item-desc">
+              Menjadi finalis kompetisi tingkat nasional mewakili Jawa Timur lewat karya audiovisual yang mengedepankan kreativitas dan kekuatan pesan.
+            </p>
+          </li>
+          <li>
+            <div class="cv-item-title">Penerima Pendanaan PKM-K</div>
+            <div class="cv-item-sub">Kewirausahaan Berbasis Potensi Lokal | Jan 2024</div>
+            <p class="cv-item-desc">
+              Lolos seleksi pendanaan Program Kreativitas Mahasiswa bidang Kewirausahaan (PKM-K) melalui inovasi dan kerja sama tim yang solid.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sertifikasi & Pelatihan -->
+      <div class="cv-card">
+        <div class="cv-card-header">
+          <div class="cv-card-icon"><i class="ri-award-line"></i></div>
+          <h3 class="cv-card-title">Sertifikasi & Pelatihan</h3>
+        </div>
+        <ul class="cv-list">
+          <li>
+            <div class="cv-item-title">Seminar Public Speaking DARE TO SPEAK</div>
+            <div class="cv-item-sub">Komunitas Berani Bicara Indonesia (KBBI)</div>
+            <p class="cv-item-desc">Pelatihan komunikasi publik, sistematika penyampaian gagasan, dan presentasi audiens.</p>
+          </li>
+          <li>
+            <div class="cv-item-title">Short Course "Office dan Blog"</div>
+            <div class="cv-item-sub">Unisda Lamongan</div>
+            <p class="cv-item-desc">Kompetensi teknologi informasi, pengolahan dokumen administratif, serta manajemen publikasi konten.</p>
+          </li>
+          <li>
+            <div class="cv-item-title">LKMM-TD (Tingkat Dasar)</div>
+            <div class="cv-item-sub">BEM Unisda</div>
+            <p class="cv-item-desc">Pelatihan manajemen organisasi, pengambilan keputusan, dan koordinasi sistematis.</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MODAL PEMUTAR VIDEO INSTAN -->
+  <div class="video-modal" id="videoModal">
+    <div class="modal-dialog">
+      <button class="modal-close-btn" onclick="closeVideoModal()">
+        <i class="ri-close-line"></i>
+      </button>
+      <div class="modal-iframe-box" id="modalVideoContainer"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER DENGAN KONTAK DARI CV -->
+  <footer>
+    <div class="footer-title">Portofolio_Biman</div>
+    <p class="footer-desc">Kab. Lamongan, Jawa Timur • +62 896 4861 1919 • faiqppnh@gmail.com</p>
+    
+    <div class="social-links">
+      <a href="mailto:faiqppnh@gmail.com" class="social-btn" title="Email"><i class="ri-mail-line"></i></a>
+      <a href="https://wa.me/6289648611919" target="_blank" class="social-btn" title="WhatsApp"><i class="ri-whatsapp-line"></i></a>
+      <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i class="ri-youtube-line"></i></a>
+      <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i class="ri-instagram-line"></i></a>
+    </div>
+
+    <p class="copy-text">© 2026 Portofolio_Biman • M. Fa'ieq Firmansyah Bimantara. All rights reserved.</p>
+  </footer>
+
+  <!-- JAVASCRIPT RINGAN & TANPA LAG -->
+  <script>
+    // 1. Toggle ID Card Dropdown dari Atas Layar
+    function toggleIdCard(show) {
+      const overlay = document.getElementById('idCardOverlay');
+      if (show) {
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+    }
+
+    function handleOverlayClick(event) {
+      if (event.target.id === 'idCardOverlay') {
+        toggleIdCard(false);
+      }
+    }
+
+    // 2. Pemutar Video Instan (Modal Pop-Up)
+    const videoModal = document.getElementById('videoModal');
+    const modalContainer = document.getElementById('modalVideoContainer');
+
+    function playInstantVideo(type, idOrUrl) {
+      if (type === 'youtube') {
+        modalContainer.innerHTML = `
+          <iframe 
+            src="https://www.youtube.com/embed/${idOrUrl}?autoplay=1&rel=0" 
+            title="Video Player" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
+        `;
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        window.open(idOrUrl, '_blank', 'noopener,noreferrer');
+      }
+    }
+
+    function closeVideoModal() {
+      videoModal.classList.remove('active');
+      modalContainer.innerHTML = '';
+      document.body.style.overflow = 'auto';
+    }
+
+    videoModal.addEventListener('click', (e) => {
+      if (e.target.id === 'videoModal') {
+        closeVideoModal();
+      }
+    });
+
+    // 3. Efek Geser Samping Pada Carousel 10 Model Desain
+    const track = document.getElementById('designTrack');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    track.addEventListener('mouseleave', () => { isDown = false; });
+    track.addEventListener('mouseup', () => { isDown = false; });
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      track.scrollLeft = scrollLeft - walk;
+    });
+  </script>
+</body>
+</html>

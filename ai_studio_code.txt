@@ -1,0 +1,15 @@
+Portofolio_Biman/
+│
+├── index.html
+└── img/
+    ├── profil.jpg     <-- (Foto wajah/profil Anda untuk ID Card)
+    ├── desain1.jpg    <-- (Poster Kernel One - Cyberpunk)
+    ├── desain2.jpg    <-- (Poster Film Pulang Ke Diri)
+    ├── desain3.jpg    <-- (Poster Airport Looks AMI PARIS)
+    ├── desain4.jpg    <-- (Poster Moments The Gesture)
+    ├── desain5.jpg    <-- (Poster NEVER LOSE Spotify)
+    ├── desain6.jpg    <-- (Poster Open Recruitment UKM PSM)
+    ├── desain7.jpg    <-- (Poster Cover Lagu Indonesia Pusaka)
+    ├── desain8.jpg    <-- (Poster Kami Sedaran)
+    ├── desain9.jpg    <-- (Poster My Kisah Wisuda)
+    └── desain10.jpg   <-- (Poster Typography Sonic Kinetic)
